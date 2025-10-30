@@ -4,7 +4,7 @@
 
 ### 1. Initial Setup
 ```bash
-cd C:\Users\engmo\Claude_Project\pdf_rag_mcp_server
+cd pdf_rag_mcp_server
 python setup.py
 ```
 

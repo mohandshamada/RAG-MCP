@@ -84,13 +84,16 @@ python client.py compare-all requirements.txt
 
 ## With Claude Desktop
 
+**See detailed guide in `CLAUDE_DESKTOP_SETUP.md`**
+
+Quick steps:
 1. Open Claude Desktop config:
    - **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
    - **Mac**: `~/.config/Claude/claude_desktop_config.json`
 
-2. Paste content from `claude_desktop_config.json`
+2. Copy content from `claude_desktop_config.json` (update paths)
 
-3. Update path to match your installation
+3. Replace `/path/to/pdf_rag_mcp_server` with your actual installation path
 
 4. Restart Claude
 
