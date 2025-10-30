@@ -1,0 +1,76 @@
+{
+  "name": "Software Requirements Specification",
+  "version": "1.0",
+  "requirements": [
+    {
+      "id": "REQ_001",
+      "category": "Functional",
+      "text": "System must support user authentication with email and password",
+      "expected": "Present",
+      "priority": "High"
+    },
+    {
+      "id": "REQ_002",
+      "category": "Functional",
+      "text": "System must provide role-based access control (RBAC)",
+      "expected": "Present",
+      "priority": "High"
+    },
+    {
+      "id": "REQ_003",
+      "category": "Functional",
+      "text": "System must support data export in CSV format",
+      "expected": "Present",
+      "priority": "Medium"
+    },
+    {
+      "id": "REQ_004",
+      "category": "Non-Functional",
+      "text": "System response time must be less than 2 seconds",
+      "expected": "< 2s",
+      "priority": "High"
+    },
+    {
+      "id": "REQ_005",
+      "category": "Non-Functional",
+      "text": "System must support at least 10,000 concurrent users",
+      "expected": ">= 10000",
+      "priority": "High"
+    },
+    {
+      "id": "REQ_006",
+      "category": "Security",
+      "text": "All data must be encrypted at rest using AES-256",
+      "expected": "AES-256",
+      "priority": "Critical"
+    },
+    {
+      "id": "REQ_007",
+      "category": "Security",
+      "text": "All data transmission must use HTTPS/TLS",
+      "expected": "HTTPS/TLS",
+      "priority": "Critical"
+    },
+    {
+      "id": "REQ_008",
+      "category": "Compliance",
+      "text": "System must comply with GDPR requirements",
+      "expected": "Compliant",
+      "priority": "High"
+    },
+    {
+      "id": "REQ_009",
+      "category": "Documentation",
+      "text": "Complete API documentation must be provided",
+      "expected": "Present",
+      "priority": "Medium"
+    },
+    {
+      "id": "REQ_010",
+      "category": "Documentation",
+      "text": "User manual must be provided in English",
+      "expected": "Present",
+      "priority": "High"
+    }
+  ]
+}

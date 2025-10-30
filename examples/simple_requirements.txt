@@ -1,0 +1,10 @@
+System must support user authentication
+System must provide role-based access control
+System must support data export in CSV format
+System response time must be less than 2 seconds
+System must support at least 10,000 concurrent users
+All data must be encrypted at rest using AES-256
+All data transmission must use HTTPS/TLS
+System must comply with GDPR requirements
+Complete API documentation must be provided
+User manual must be provided in English

@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "rag-multi-format-server": {
+      "command": "python",
+      "args": [
+        "C:\\Users\\engmo\\Claude_Project\\pdf_rag_mcp_server\\src\\rag_server.py"
+      ],
+      "env": {
+        "PYTHONPATH": "C:\\Users\\engmo\\Claude_Project\\pdf_rag_mcp_server"
+      }
+    }
+  }
+}

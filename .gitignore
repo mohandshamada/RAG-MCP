@@ -1,0 +1,42 @@
+# Environment
+.venv/
+venv/
+env/
+ENV/
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Data/Cache
+data/document_cache/
+data/metadata/
+data/vector_stores/
+*.faiss
+*.pkl
+
+# Config (if contains secrets)
+.env
+.env.local
+
+# Project specific
+*.sqlite
+*.db
+.cache/
