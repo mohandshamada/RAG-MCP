@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(python:*)",
-      "Bash(pip install:*)"
+      "Bash(pip install:*)",
+      "Bash(Remove-Item -Recurse -Force .git/rebase-merge -ErrorAction SilentlyContinue)"
     ],
     "deny": [],
     "ask": []
