@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 RAG MCP Server - Verification Script
 Tests all major components to ensure proper installation
@@ -8,6 +9,12 @@ import sys
 import os
 from pathlib import Path
 import subprocess
+
+# Fix Windows console encoding
+if sys.platform == 'win32':
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
 
 # Add project to path
 sys.path.insert(0, str(Path(__file__).parent))

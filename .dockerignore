@@ -1,0 +1,58 @@
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+dist/
+build/
+
+# Git
+.git/
+.gitignore
+.github/
+
+# IDE/Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Documentation
+docs/
+*.md
+
+# Tests (if not needed in container)
+tests/
+test_*.py
+*_test.py
+
+# Development files
+.env.local
+.env.development
+*.log
+
+# Docker
+.dockerignore
+docker-compose.override.yml
+Dockerfile*
+
+# Data (use volumes instead)
+data/vector_stores/*
+data/document_cache/*
+data/metadata/*
+logs/*
+
+# Temporary files
+*.tmp
+*.temp
+.cache/

@@ -1,0 +1,39 @@
+# docker-compose.override.yml
+# This file is optional and used for local development overrides
+# Docker Compose automatically loads this if it exists
+# Change settings here without modifying docker-compose.yml
+
+services:
+  rag-mcp-server:
+    # Build from local Dockerfile for development
+    build:
+      context: .
+      dockerfile: Dockerfile
+    
+    # Mount source code for live development
+    volumes:
+      - ./src:/app/src:ro
+      - ./config:/app/config:ro
+      - ./client.py:/app/client.py:ro
+      - rag_data:/app/data
+      - rag_logs:/app/logs
+      - ./documents:/app/documents:ro
+    
+    # More verbose logging for development
+    environment:
+      - LOG_LEVEL=DEBUG
+      - PYTHONUNBUFFERED=1
+    
+    # Keep container running for interactive use
+    stdin_open: true
+    tty: true
+    
+    # Resource limits for local development (can be lower)
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 8G
+        reservations:
+          cpus: '0.5'
+          memory: 512M

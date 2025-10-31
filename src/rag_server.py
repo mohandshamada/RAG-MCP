@@ -14,9 +14,9 @@ from typing import Optional, List, Dict, Any
 sys.path.insert(0, str(Path(__file__).parent))
 
 from mcp.server.fastmcp import FastMCP
-import PyPDF2
+import fitz  # PyMuPDF
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings  # Updated from deprecated langchain_community
 from langchain_community.vectorstores import FAISS
 from langchain_core.documents import Document
 import logging
@@ -55,27 +55,31 @@ def get_embeddings():
 
 
 def extract_pdf_content(file_path: str) -> dict:
-    """Extract text and metadata from PDF"""
+    """Extract text and metadata from PDF using PyMuPDF"""
     try:
         pdf_content = {"text": "", "pages": [], "tables": [], "images": []}
-        
-        with open(file_path, 'rb') as file:
-            reader = PyPDF2.PdfReader(file)
-            pdf_content["metadata"] = {
-                "total_pages": len(reader.pages),
-                "file_path": file_path,
-                "file_name": os.path.basename(file_path),
-                "file_type": "pdf"
-            }
-            
-            for page_num, page in enumerate(reader.pages):
-                page_text = page.extract_text()
-                pdf_content["pages"].append({
-                    "page_num": page_num + 1,
-                    "text": page_text
-                })
-                pdf_content["text"] += f"\n--- Page {page_num + 1} ---\n{page_text}"
-        
+
+        # Open PDF with PyMuPDF
+        doc = fitz.open(file_path)
+
+        pdf_content["metadata"] = {
+            "total_pages": len(doc),
+            "file_path": file_path,
+            "file_name": os.path.basename(file_path),
+            "file_type": "pdf"
+        }
+
+        # Extract text from each page
+        for page_num in range(len(doc)):
+            page = doc[page_num]
+            page_text = page.get_text()
+            pdf_content["pages"].append({
+                "page_num": page_num + 1,
+                "text": page_text
+            })
+            pdf_content["text"] += f"\n--- Page {page_num + 1} ---\n{page_text}"
+
+        doc.close()
         return pdf_content
     except Exception as e:
         logger.error(f"Error extracting PDF: {e}")
@@ -221,18 +225,28 @@ def ingest_document(file_path: str, document_name: str) -> dict:
     """
     Ingest and process document (PDF, Excel, Word, Image with OCR).
     Creates FAISS index and metadata.
-    
+
     Args:
         file_path: Full path to document
         document_name: Name to identify document
-        
+
     Returns:
         Ingestion status and metadata
+
+    Raises:
+        FileNotFoundError: If file does not exist
+        ValueError: If file type is unsupported or file is too large
     """
     try:
+        # Validate file exists
         if not os.path.exists(file_path):
-            return {"success": False, "error": f"File not found: {file_path}"}
-        
+            raise FileNotFoundError(f"File not found: {file_path}")
+
+        # Validate file size (500MB limit from config)
+        file_size_mb = os.path.getsize(file_path) / (1024 * 1024)
+        if file_size_mb > 500:
+            raise ValueError(f"File size ({file_size_mb:.2f}MB) exceeds maximum allowed size (500MB)")
+
         file_type = detect_file_type(file_path)
         logger.info(f"Processing {file_type} file: {file_path}")
         
@@ -246,7 +260,7 @@ def ingest_document(file_path: str, document_name: str) -> dict:
         elif file_type == "image":
             document_content = extract_image_with_ocr(file_path)
         else:
-            return {"success": False, "error": f"Unsupported file type: {file_type}"}
+            raise ValueError(f"Unsupported file type: {file_type}")
         
         # Create text chunks
         text_splitter = RecursiveCharacterTextSplitter(
@@ -323,17 +337,20 @@ def ingest_document(file_path: str, document_name: str) -> dict:
 def rag_query(document_name: str, query: str, top_k: int = 5) -> dict:
     """
     Query document using RAG (Retrieval-Augmented Generation).
-    
+
     Args:
         document_name: Name of indexed document
         query: Query string (natural language)
         top_k: Number of results to return
-        
+
     Returns:
         Retrieved relevant content with similarity scores
+
+    Raises:
+        ValueError: If document is not indexed
     """
     if document_name not in vector_stores:
-        return {"error": f"Document '{document_name}' not indexed."}
+        raise ValueError(f"Document '{document_name}' is not indexed. Available documents: {list(vector_stores.keys())}")
     
     try:
         vector_store = vector_stores[document_name]["vector_store"]

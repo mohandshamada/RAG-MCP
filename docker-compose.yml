@@ -1,0 +1,68 @@
+services:
+  # Main RAG MCP Server
+  rag-mcp-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rag-mcp-server
+    
+    # Volume mounts for persistence
+    volumes:
+      # Data persistence - vector stores, metadata, cache
+      - rag_data:/app/data
+      - rag_logs:/app/logs
+      # Optional: Mount local documents directory
+      - ./documents:/app/documents:ro
+    
+    # Environment variables
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PYTHONDONTWRITEBYTECODE=1
+      - DATA_DIR=/app/data
+      - LOG_DIR=/app/logs
+      - LOG_LEVEL=INFO
+    
+    # Port mapping (if using network mode)
+    ports:
+      - "8000:8000"
+    
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 4G
+        reservations:
+          cpus: '1'
+          memory: 2G
+    
+    # Restart policy
+    restart: unless-stopped
+    
+    # Health check
+    healthcheck:
+      test: ["CMD", "python", "-c", "from src.rag_server import mcp; print('healthy')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    
+    # Logging configuration
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+# Named volumes for data persistence
+volumes:
+  rag_data:
+    driver: local
+  rag_logs:
+    driver: local
+
+# Networks
+networks:
+  default:
+    name: rag-network
+    driver: bridge

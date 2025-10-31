@@ -1,42 +1,213 @@
-# Environment
-.venv/
-venv/
-env/
-ENV/
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
-*.egg-info/
-dist/
+*.so
+.Python
 build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
 
-# IDE
+# Virtual Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.python-version
+
+# UV Package Manager
+.uv/
+uv.lock
+
+# IDEs and Editors
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
-
-# OS
 .DS_Store
 Thumbs.db
+*.sublime-project
+*.sublime-workspace
+.project
+.pydevproject
+.settings/
 
-# Logs
-logs/
+# Testing and Coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+.hypothesis/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.ruff_cache/
+test-results/
+test_output/
+
+# Documentation Build
+docs/_build/
+site/
+_build/
+_static/
+_templates/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Runtime Data and Logs
+data/vector_stores/*
+!data/vector_stores/.gitkeep
+data/document_cache/*
+!data/document_cache/.gitkeep
+data/metadata/*
+!data/metadata/.gitkeep
+logs/*
+!logs/.gitkeep
 *.log
+*.log.*
 
-# Data/Cache
-data/document_cache/
-data/metadata/
-data/vector_stores/
-*.faiss
-*.pkl
-
-# Config (if contains secrets)
+# Environment Variables and Secrets
 .env
+.env.*
+!.env.example
 .env.local
+.env.*.local
+.env.development
+.env.production
+*.pem
+*.key
+*.cert
+credentials.json
+.secrets/
+secrets.yaml
 
-# Project specific
-*.sqlite
-*.db
+# Temporary Files
+*.tmp
+*.temp
+*.bak
 .cache/
+tmp/
+temp/
+
+# OS Specific
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Compiled Files
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Package/Archive Files
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Database Files
+*.db
+*.sqlite
+*.sqlite3
+
+# Docker Local Overrides
+docker-compose.override.yml.local
+.dockerignore.local
+
+# Local Configuration
+config.local.py
+local_settings.py
+settings.local.py
+
+# Large Document Files (keep only examples)
+*.pdf
+*.docx
+*.xlsx
+*.xls
+*.pptx
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+!test_data/*.pdf
+!test_data/*.xlsx
+!test_data/*.txt
+!examples/**/*.pdf
+!examples/**/*.xlsx
+
+# Model Files (too large for git)
+*.h5
+*.hdf5
+*.ckpt
+*.pb
+*.bin
+*.safetensors
+models/
+checkpoints/
+
+# FAISS Indices (generated at runtime)
+*.faiss
+*.index
+*.pkl
+*.pickle
+
+# Profiling
+*.prof
+*.lprof
+
+# Node (if any)
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+
+# Backup Files
+*~
+\#*\#
+.#*
+*.orig
+
+# UV Cache
+.uv_cache/
+
+# Local Test Data (not in test_data/)
+local_documents/
+scratch/
+playground/
