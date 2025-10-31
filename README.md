@@ -23,15 +23,13 @@ A high-performance **Model Context Protocol (MCP)** server for intelligent docum
 
 **Unix/Linux/macOS:**
 ```bash
-git clone <your-repo-url>
-cd pdf_rag_mcp_server
-chmod +x install_uv.sh
-./install_uv.sh
+pip install uv
+
 ```
 
 **Windows:**
 ```powershell
-git clone <your-repo-url>
+git clone https://github.com/mohandshamada/RAG-MCP.git
 cd pdf_rag_mcp_server
 .\install_uv.ps1
 ```
@@ -44,7 +42,7 @@ uv run python main.py
 ### Option 2: Traditional pip
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/mohandshamada/RAG-MCP.git
 cd pdf_rag_mcp_server
 pip install -r requirements.txt
 python main.py
