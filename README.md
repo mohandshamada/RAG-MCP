@@ -51,7 +51,7 @@ python main.py
 ### Option 3: Docker
 
 ```bash
-git clone clone https://github.com/mohandshamada/RAG-MCP.git
+git clone https://github.com/mohandshamada/RAG-MCP.git
 cd pdf_rag_mcp_server
 docker-compose up -d
 ```
@@ -533,8 +533,8 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 📞 Support
 
-- **Issues**: [GitHub Issues](https://github.com/yourusername/pdf-rag-mcp-server/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/pdf-rag-mcp-server/discussions)
+- **Issues**: [GitHub Issues](https://github.com/mohandshamada/RAG-MCP/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/mohandshamada/RAG-MCP/discussions)
 - **Documentation**: See docs/ folder
 
 ## 🎯 Roadmap
