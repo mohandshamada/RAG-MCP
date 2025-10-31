@@ -51,7 +51,7 @@ python main.py
 ### Option 3: Docker
 
 ```bash
-git clone <your-repo-url>
+git clone clone https://github.com/mohandshamada/RAG-MCP.git
 cd pdf_rag_mcp_server
 docker-compose up -d
 ```
